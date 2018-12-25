@@ -194,4 +194,3 @@ switch($_POST["submit"]) {
 case "Save...": include "./save.php"; break;
 default: include "./make.php";
 }
-?>
