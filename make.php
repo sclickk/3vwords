@@ -199,7 +199,9 @@ if($pattern != "") {
     if($fabts) echo $fabts." by pattern filters";
     echo ")";
   }
-  echo " | generated in ".sprintf("%.3f", ($finish_time-$start_time))." seconds";
+  /** @var $generated_time The time took the page to generate. */
+  $generated_time = $finish_time - $start_time;
+  echo " | generated in " . sprintf("%.3f", $generated_time) . " seconds";
   echo " | possibilities with this pattern: " . $possibilities;
   echo "</div>";
 }
