@@ -1,6 +1,15 @@
 <?php
-function scrlim(&$scn) { // returns index of the row just after the last filled row
-  for($n=0; $n<=25; $n++) if($scn[$n]!="") $scrlim = $n+1;
+
+/**
+ * Returns the index of the row just after the last filled row.
+ */
+function scrlim(&$scn)
+{
+  for ($n = 0; $n <= 25; $n++) {
+    if ($scn[$n] != "") {
+      $scrlim = $n + 1;
+    }
+  }
   return $scrlim;
 }
 
