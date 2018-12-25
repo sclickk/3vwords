@@ -21,11 +21,8 @@ function render($string, &$scn, &$scc, $c = 0) {
       $f = fragments($options[$p], $scn, $scc); $nf = 1;
       for($i=0; IsSet($f[$i][0]); $i++) {
         switch($f[$i][0][0]) {
-        case '[':
-          $nf *= render(SubStr($f[$i][0], 1, -1), $scn, $scc, $c);
-          break;
-        case '(':
-          $nf *= 1 + render(SubStr($f[$i][0], 1, -1), $scn, $scc, $c);
+          case '[': $nf *= render(SubStr($f[$i][0], 1, -1), $scn, $scc, $c); break;
+          case '(': $nf *= render(SubStr($f[$i][0], 1, -1), $scn, $scc, $c) + 1;
         }
       }
       $no += $nf;
@@ -37,14 +34,16 @@ function render($string, &$scn, &$scc, $c = 0) {
     for($i=0; IsSet($f[$i][0]); $i++) {
       $fragr = "";
       switch($f[$i][0][0]) {
-      case '[':
-        $fragr = render(SubStr($f[$i][0], 1, -1), $scn, $scc);
-        break;
-      case '(':
-        if(mt_rand(0, 1) == 1) $fragr = render(SubStr($f[$i][0], 1, -1), $scn, $scc);
-        break;
-      default:
-        $fragr = $f[$i][0];
+        case '[':
+          $fragr = render(SubStr($f[$i][0], 1, -1), $scn, $scc);
+          break;
+        case '(':
+          if(mt_rand(0, 1) == 1) {
+            $fragr = render(SubStr($f[$i][0], 1, -1), $scn, $scc);
+          }
+          break;
+        default:
+          $fragr = $f[$i][0];
       }
       for($filti=0; IsSet($f[$i][1+$filti]); $filti++) { // filters of the fragment
         if($fragr == $f[$i][1+$filti]) $rendering_aborted = 1;
@@ -170,7 +169,7 @@ function fragments($string, &$scn, &$scc){
                 switch($string[$p]) {
                   case '[': $f[$i][0] .= chr(1); break;  /* dummy characters for fragment-initial brackets */
                   case '(': $f[$i][0] .= chr(2); break;  /* to get around their detection in render()      */
-                  default: $f[$i][0] .= $string[$p];
+                  default:  $f[$i][0] .= $string[$p];
                 }
               }
             }
@@ -191,6 +190,6 @@ function fragments($string, &$scn, &$scc){
 /****************************************/
 
 switch($_POST["submit"]) {
-case "Save...": include "./save.php"; break;
-default: include "./make.php";
+  case "Save...": include "./save.php"; break;
+  default:        include "./make.php";
 }
