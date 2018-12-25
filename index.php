@@ -135,7 +135,11 @@ function fragments($string, &$scn, &$scc){
   for($p=0; $p < StrLen($string); $p++) {
     if($string[$p]>='A' && $string[$p]<='Z') { // a shortcut letter
       $scrlim = scrlim($scn); $f[$i][0] = "";
-      for($n=0; $n<$scrlim; $n++) if($scn[$n]==$string[$p]) $f[$i][0] = '['.$scc[$n].']';
+      for ($n = 0; $n < $scrlim; $n++) {
+        if ($scn[$n] == $string[$p]) {
+          $f[$i][0] = '['.$scc[$n].']';
+        }
+      }
       $i++; $filti = 0;
     }
     elseif($string[$p]=='^') { // a filter for currently open fragment
