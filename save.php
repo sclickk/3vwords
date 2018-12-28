@@ -13,14 +13,14 @@ $scrlim = scrlim($scn);
 
 // Shortcuts
 for ($n = 0; $n < $scrlim; $n++) {
-  echo $scn[$n] . ':' . $scc[$n] . '\n';
+  echo $scn[$n] . ':' . $scc[$n] . "\n";
 }
 
 // Pattern
-echo 'r:' . $_POST['pattern'] . '\n';
+echo 'r:' . $_POST['pattern'] . "\n";
 // Number of words to generate
-echo 'n:' . $_POST['numw'] . '\n';
+echo 'n:' . $_POST['numw'] . "\n";
 // New line each
-echo ($_POST['nle'] ? 'nle\n' : '');
+echo ($_POST['nle'] ? "nle\n" : '');
 // Filter duplicates
-echo ($_POST['filterdup'] ? 'filterdup\n' : '');
+echo ($_POST['filterdup'] ? "filterdup\n" : '');

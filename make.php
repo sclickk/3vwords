@@ -86,18 +86,23 @@ if(!isset($scn) && !isset($scc)) {
   $scn[3] = "F"; $scc[3] = "s";
   $scn[4] = "N"; $scc[4] = "m/n";
   $scrlim = 5;
+} else {
+  $scrlim = scrlim($scn);
 }
-else $scrlim = scrlim($scn);
 
-for($n=0; $n<=25; $n++) {
+for ($n = 0; $n <= 25; $n++) {
   echo "\n\n<div class=\"sc_row\" id=\"sc_row$n\""; 
-	if ($n>$scrlim) echo " style=\"display: none\"";
+	if ($n > $scrlim) {
+    echo " style=\"display: none\"";
+  }
 	echo "><select style=\"width:4em\" name=\"scn[$n]\" id=\"sc_select$n\""; 
-	if($n==$scrlim) echo " onchange=\"addscrow($n)\""; 
+	if($n == $scrlim) {
+    echo " onchange=\"addscrow($n)\"";
+  }
 	echo ">";
   echo "<option value=\"\""; if($scn[$n]=="") echo " selected"; echo ">-</option>\n";
 	$i = 0; $char = 'A';
-  while($i<=25) {
+  while ($i <= 25) {
     echo "<option value=\"$char\""; if($scn[$n]==$char) echo " selected"; echo ">$char</option>\n"; 
   	$i++; $char++;
   }
@@ -120,7 +125,9 @@ if (!isset($pattern)) {
 ?>
 <label for="pattern"><b>pattern:</b> </label><input name="pattern" id="pattern" type="text" 
 value="<?php echo htmlspecialchars($pattern); ?>" maxlenght="200" size="64"></div>
-<div id="gensec"><label for="numw">words: </label>
+<div id="gensec">
+
+<label for="numw">Number of words to generate: </label>
 <?php 
 if (!isset($numw)) {
   if ($_POST['numw'] > 9999) {
@@ -136,10 +143,20 @@ if (!isset($numw)) {
 
 echo '<input name="numw" id="numw" type="text" size="4" maxlength="4" value="' . $numw . '" />'; 
 
-echo '<input name="nle" id="nle" class="checkbox" type="checkbox"'; 
-if(IsSet($_POST['nle'])) $nle = $_POST['nle'];
-if($nle) echo ' checked="checked"'; 
-echo ' />'; echo "<label class=\"checkbox\" for=\"nle\">new line each</label>";
+echo '<input name="nle" id="nle" class="checkbox" type="checkbox"';
+
+$nle = null;
+
+if (isset($_POST['nle'])) {
+  $nle = $_POST['nle'];
+}
+
+if ($nle) {
+  echo ' checked="checked"';
+}
+
+echo '/>';
+echo "<label class=\"checkbox\" for=\"nle\">new line each</label>";
 
 echo '<input name="filterdup" id="filterdup" class="checkbox" type="checkbox"'; 
 if(IsSet($_POST['filterdup'])) $filterdup = $_POST['filterdup'];

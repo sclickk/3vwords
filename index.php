@@ -22,11 +22,13 @@ $exceeded_weight_limit = 0;
  * $c==0 (default) -- return the number all possible renderings
  * otherwise       -- return a randomly generated string
  */
-function render($string, &$scn, &$scc, $c = 0) {
+function render($string, &$scn, &$scc, $c = 0)
+{
   global $rendering_aborted;
-  if($c > 0){ // count all possible renderings
-    $options = choose($string, 1); $no = 0;
-    for($p=0; IsSet($options[$p]); $p++) {
+  if ($c > 0) { // count all possible renderings
+    $options = choose($string, 1);
+    $no = 0;
+    for ($p = 0; IsSet($options[$p]); $p++) {
       $f = fragments($options[$p], $scn, $scc); $nf = 1;
       for($i=0; IsSet($f[$i][0]); $i++) {
         switch($f[$i][0][0]) {
@@ -37,8 +39,7 @@ function render($string, &$scn, &$scc, $c = 0) {
       $no += $nf;
     }
     return $c*$no;
-  }
-  else{ // render
+  } else { // render
     $f = fragments(choose($string), $scn, $scc);
     for($i=0; IsSet($f[$i][0]); $i++) {
       $fragr = "";
@@ -54,13 +55,20 @@ function render($string, &$scn, &$scc, $c = 0) {
         default:
           $fragr = $f[$i][0];
       }
-      for($filti=0; IsSet($f[$i][1+$filti]); $filti++) { // filters of the fragment
-        if($fragr == $f[$i][1+$filti]) $rendering_aborted = 1;
+
+      for($filti = 0; IsSet($f[$i][$filti + 1]); $filti++) { // filters of the fragment
+        if ($fragr == $f[$i][$filti + 1]) {
+          $rendering_aborted = 1;
+        }
       }
-      if($rendering_aborted) return false;
+
+      if ($rendering_aborted) {
+        return false;
+      }
+
       $r .= $fragr;
     }
-    $uncover_brackets = chr(1).chr(2);
+    $uncover_brackets = chr(1) . chr(2);
     return strtr($r, $uncover_brackets, "[(");
   }
 }
@@ -84,53 +92,71 @@ function choose($string, $c = 0) {
   $i = 0;
   $ti = 0;
   $options[0] = ""; // allocate the first option
-  while($p < StrLen($string)) {
-    $level = 0; $weight_str = "";
-    for($p; !($level==0 && $string[$p]=='/') && $p<StrLen($string); $p++) { // process the option's characters
-      if($string[$p]=='"') { // escaped characters
-        $options[$i] .= $string[$p]; $p++;
-        for($p; $p<StrLen($string); $p++) {
-          $options[$i] .= $string[$p];
-          if($string[$p]=='"') break;
-        }
-      }
-      elseif($string[$p]=='*') { // weight specification
+  while($p < strlen($string)) {
+    $level = 0;
+    $weight_str = "";
+    // process the option's characters
+    for($p; $p < strlen($string)
+         && !($level == 0 && $string[$p] == '/'); $p++) {
+      if($string[$p] == '"') { // escaped characters
+        $options[$i] .= $string[$p];
         $p++;
-        for($p; $string[$p]>='0' && $string[$p]<= '9' && $p<StrLen($string); $p++)
+        for ($p; $p < strlen($string); $p++) {
+          $options[$i] .= $string[$p];
+          if ($string[$p] == '"') {
+            break;
+          }
+        }
+      } elseif ($string[$p] == '*') { // weight specification
+        $p++;
+        for($p; $string[$p] >= '0'
+             && $string[$p] <= '9'
+             && $p < strlen($string); $p++) {
           $weight_str .= $string[$p];
+        }
         $p--;
       } else {
         $options[$i] .= $string[$p];
-        $enter_level = "/[\[\(]/"; // Enter a level
-        $escape_level = "/[\)\]]/"; // Leave a level
-        if (preg_match($enter_level, $string[$p])) $level++;
-        if (preg_match($escape_level, $string[$p])) $level--;
-      }
-      else {
-          $options[$i] .= $string[$p];
-          if($string[$p]=='[' || $string[$p]=='(') $level++;
-          if($string[$p]==']' || $string[$p]==')') $level--;
+        if ($string[$p] == '[' || $string[$p] == '(') $level++;
+        if ($string[$p] == ']' || $string[$p] == ')') $level--;
       }
     }
-    if($weight_str=="") $weight_str = "1";
+    if ($weight_str == "") {
+      $weight_str = "1";
+    }
+
     $weight = (int) $weight_str;
-    if($weight < 1) $weight = 1;
-    if($weight > 128 && !$exceeded_weight_limit) {
+
+    if ($weight < 1) {
+      $weight = 1;
+    }
+
+    if ($weight > 128 && !$exceeded_weight_limit) {
       $exceeded_weight_limit = $weight;
       $weight = 128;
     }
+
     $stop = $ti + $weight;
-    for($ti; $ti<$stop; $ti++) $target[$ti] = &$options[$i]; // insert references into the target for choosing
-    if($string[$p]=='/') {  // there is a next option -> allocate it
-      $options[$i+1] = "";
+
+    for ($ti; $ti < $stop; $ti++) {
+      $target[$ti] = &$options[$i]; // insert references into the target for choosing
+    }
+
+    if ($string[$p] == '/') {  // there is a next option -> allocate it
+      $options[$i + 1] = "";
       $i++;
     }
+
     $p++;
   }
+
   //print_r($options);
   //print_r($target);
-  if($c > 0) return $options;
-  else return $target[mt_rand(0, $ti-1)];
+  if ($c > 0) {
+    return $options;
+  } else {
+    return $target[mt_rand(0, $ti - 1)];
+  }
 }
 
 
@@ -142,13 +168,15 @@ function fragments($string, &$scn, &$scc){
   $i = 0; $filti = 0;
   for($p=0; $p < StrLen($string); $p++) {
     if($string[$p]>='A' && $string[$p]<='Z') { // a shortcut letter
-      $scrlim = scrlim($scn); $f[$i][0] = "";
+      $scrlim = scrlim($scn);
+      $f[$i][0] = "";
       for ($n = 0; $n < $scrlim; $n++) {
         if ($scn[$n] == $string[$p]) {
           $f[$i][0] = '['.$scc[$n].']';
         }
       }
-      $i++; $filti = 0;
+      $i++;
+      $filti = 0;
     }
     elseif($string[$p]=='^') { // a filter for currently open fragment
       $p++; $length = 0; $esc = false; // note: escaping works inside filters
@@ -157,7 +185,9 @@ function fragments($string, &$scn, &$scc){
         && !($string[$p+$length]>='A' && $string[$p+$length]<='Z')
         && $string[$p+$length]!='^' && ($p+$length)<StrLen($string))
         ) {
-          if($string[$p+$length]=='"') $esc = 1-$esc;
+          if ($string[$p+$length] == '"') {
+            $esc = 1 - $esc;
+          }
           $length++;
         }
       if($length > 0) {
@@ -165,11 +195,13 @@ function fragments($string, &$scn, &$scc){
         //echo "<br>$p $length substring: ".substr($string, $p, $length)."<br>";
         //echo "<br>$p $length filter: ".$filter[0][0]."<br>";
         //echo "::$i<br>";
-        $f[$i-1][1+$filti] = $filter[0][0]; $filti++;
+        $f[$i-1][1+$filti] = $filter[0][0];
+        $filti++;
         $p = $p + $length;
-        if($string[$p]=='^') $p--;
+        if ($string[$p] == '^') {
+          $p--;
+        }
       }
-    }
     } else {
       // Brackets
       if($string[$p] == '[' || $string[$p] == '(') {
@@ -178,8 +210,10 @@ function fragments($string, &$scn, &$scc){
           if($string[$p] == '[' || $string[$p] == '(') $level++;
           if($string[$p] == ']' || $string[$p] == ')') $level--;
           $f[$i][0] .= $string[$p]; $p++;
-        } while($level>=0 && $p<StrLen($string));
-        $p--; $i++; $filti = 0;
+        } while($level >= 0 && $p < StrLen($string));
+        $p--;
+        $i++;
+        $filti = 0;
       } else { // read characters
         for($p;
          $string[$p] != '[' && $string[$p] != '('
