@@ -1,11 +1,10 @@
-<?php echo "<?xml version=\"1.0\" encoding=\"windows-1250\"?>\n"; ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8"/>
 <title>Awkwords - word generator</title>
-<meta http-equiv="content-type" content="text/xml; charset=windows-1250" />
-<meta http-equiv="content-language" content="en" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="content-language" content="en"/>
 <link rel="stylesheet" href="default.css" type="text/css" media="all" />
 <script type="text/javsacript" src="lib/extern/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="lib/main.js"></script>
