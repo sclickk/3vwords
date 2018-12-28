@@ -99,6 +99,12 @@ function choose($string, $c = 0) {
         for($p; $string[$p]>='0' && $string[$p]<= '9' && $p<StrLen($string); $p++)
           $weight_str .= $string[$p];
         $p--;
+      } else {
+        $options[$i] .= $string[$p];
+        $enter_level = "/[\[\(]/"; // Enter a level
+        $escape_level = "/[\)\]]/"; // Leave a level
+        if (preg_match($enter_level, $string[$p])) $level++;
+        if (preg_match($escape_level, $string[$p])) $level--;
       }
       else {
           $options[$i] .= $string[$p];
