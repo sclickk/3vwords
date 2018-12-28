@@ -112,7 +112,17 @@ for($n=0; $n<=25; $n++) {
 }
 ?> </div>
 <div id="psec">
-<?php if(!IsSet($pattern)) if(!IsSet($_POST['pattern'])) $pattern = "CV(CV)(N)"; else $pattern = $_POST['pattern']; ?>
+<?php
+
+if (!isset($pattern)) {
+  if (!isset($_POST['pattern'])) {
+    $pattern = "CV(CV)(N)";
+  } else {
+    $pattern = $_POST['pattern'];
+  }
+}
+
+?>
 <label for="pattern"><b>pattern:</b> </label><input name="pattern" id="pattern" type="text" 
 value="<?php echo htmlspecialchars($pattern); ?>" maxlenght="200" size="64"></div>
 <div id="gensec"><label for="numw">words: </label>
