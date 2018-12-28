@@ -6,7 +6,6 @@
 <title>Awkwords - word generator</title>
 <meta http-equiv="content-type" content="text/xml; charset=windows-1250" />
 <meta http-equiv="content-language" content="en" />
-<meta http-equiv="expires" content="Sun 26 Jun 2005 12:00:00 GMT" />
 <link rel="stylesheet" href="default.css" type="text/css" media="all" />
 <script language="JavaScript" type="text/javascript">
 function addscrow(n) {
