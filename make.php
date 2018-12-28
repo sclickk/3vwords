@@ -183,7 +183,9 @@ if($pattern != "") {
     elseif(!$filterdup || !isset($generated_words[$word])) { 
       $ws++; $generated_words[$word] = true; 
       echo HTMLSpecialChars($word);
-      if($nle) echo "<br />";
+      if ($nle) {
+        echo "<br />";
+      }
       else echo " ";
     }
     else $dups++;
