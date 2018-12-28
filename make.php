@@ -32,17 +32,13 @@ function select_all() {
     range.select();
   }
 }
-function new_window(anchor) {
-  if(window.open(anchor.href)) return false;
-  else return true;
-}
 </script>
 </head>
 <body>
 <div class="heading">
 <h1 class="h_left">Awkwords - word generator</h1>
 <div class="h_right">
-<a id="help" href="help.html" onclick="return new_window(this)">Help</a>
+<a id="help" href="help.html" target="_blank">Help</a>
 </div>
 <!-- web stats [nv.cz]
 <div id="counter">
