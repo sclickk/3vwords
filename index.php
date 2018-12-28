@@ -170,11 +170,13 @@ function fragments($string, &$scn, &$scc){
         if($string[$p]=='^') $p--;
       }
     }
-    else {
-      if($string[$p]=='[' || $string[$p]=='(') { // brackets
-        $level = -1; do {
-          if($string[$p]=='[' || $string[$p]=='(') $level++;
-          if($string[$p]==']' || $string[$p]==')') $level--;
+    } else {
+      // Brackets
+      if($string[$p] == '[' || $string[$p] == '(') {
+        $level = -1;
+        do {
+          if($string[$p] == '[' || $string[$p] == '(') $level++;
+          if($string[$p] == ']' || $string[$p] == ')') $level--;
           $f[$i][0] .= $string[$p]; $p++;
         } while($level>=0 && $p<StrLen($string));
         $p--; $i++; $filti = 0;
