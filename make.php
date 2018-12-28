@@ -85,12 +85,12 @@ if(IsSet($_FILES['file'])) { // load settings from the file
 if(IsSet($_POST['scn'])) $scn = $_POST['scn'];
 if(IsSet($_POST['scc'])) $scc = $_POST['scc'];
 if(!IsSet($scn) && !IsSet($scc)) {
-$scn[0] = "V"; $scc[0] = "a/i/u";
-$scn[1] = "C"; $scc[1] = "p/t/k/s/m/n";
-$scn[2] = "T"; $scc[2] = "p/t/k";
-$scn[3] = "F"; $scc[3] = "s";
-$scn[4] = "N"; $scc[4] = "m/n";
-$scrlim = 5;
+  $scn[0] = "V"; $scc[0] = "a/i/u";
+  $scn[1] = "C"; $scc[1] = "p/t/k/s/m/n";
+  $scn[2] = "T"; $scc[2] = "p/t/k";
+  $scn[3] = "F"; $scc[3] = "s";
+  $scn[4] = "N"; $scc[4] = "m/n";
+  $scrlim = 5;
 }
 else $scrlim = scrlim($scn);
 
