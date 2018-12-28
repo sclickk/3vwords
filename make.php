@@ -9,26 +9,39 @@
 <link rel="stylesheet" href="default.css" type="text/css" media="all" />
 <script src="lib/extern/jquery-3.3.1.min.js"></script>
 <script language="JavaScript" type="text/javascript">
+
+/**
+ * Add a pattern to the shortcuts list.
+ */
 function addscrow(n) {
-  var s = document.getElementById('sc_select'+n); s.onchange = "";
-  var nrow = document.getElementById('sc_row'+(n+1)); nrow.style.display = 'block'; 
-  var ns = document.getElementById('sc_select'+(n+1)); ns.onchange = function() { addscrow(n+1); } 
+  var s = $('#sc_select' + n);
+  s.on('change', function () {});
+  var nrow = $('#sc_row' + (n+1));
+  nrow.css('display', 'block');
+  var ns = $('#sc_select' + (n+1));
+  ns.on('change', function () {
+    addscrow(n+1);
+  });
 }
+
+/**
+ * The "Open >" button
+ */
 function loadsec() {
-  document.getElementById('loadsec').style.display = 'block';
-  document.getElementById('loadsecinvoker').style.visibility = 'hidden';
+  $('#loadsec').css('display', 'block');
+  $('#loadsecinvoker').css('visibility', 'hidden');
 }
+
 function select_all() {
   try {
     selection = window.getSelection();
     selection.removeAllRanges();
     range = document.createRange();
-    range.selectNodeContents(document.getElementById('words'));
+    range.selectNodeContents($('#words')[0]);
     selection.addRange(range);
-  }
-  catch(e) { // IE
+  } catch(e) { // IE
     range = document.body.createTextRange();
-    range.moveToElementText(document.getElementById('words'));
+    range.moveToElementText($('#words')[0]);
     range.select();
   }
 }
