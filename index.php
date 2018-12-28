@@ -80,7 +80,9 @@ get_filters();*/
  */
 function choose($string, $c = 0) {
   global $exceeded_weight_limit;
-  $p = 0; $i = 0; $ti = 0;
+  $p = 0;
+  $i = 0;
+  $ti = 0;
   $options[0] = ""; // allocate the first option
   while($p < StrLen($string)) {
     $level = 0; $weight_str = "";
