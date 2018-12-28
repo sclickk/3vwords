@@ -7,6 +7,7 @@
 <meta http-equiv="content-type" content="text/xml; charset=windows-1250" />
 <meta http-equiv="content-language" content="en" />
 <link rel="stylesheet" href="default.css" type="text/css" media="all" />
+<script src="lib/extern/jquery-3.3.1.min.js"></script>
 <script language="JavaScript" type="text/javascript">
 function addscrow(n) {
   var s = document.getElementById('sc_select'+n); s.onchange = "";
