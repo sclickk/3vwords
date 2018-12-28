@@ -191,7 +191,7 @@ if($pattern != "") {
   $fabts = 0; // aborted rendering counter
   /** @var $start_time The microtime() at the start of rendering */
   $start_time = array_sum(explode(' ', microtime()));
-  for($i=1; $i<=$numw; $i++) {
+  for($i = 1; $i <= $numw; $i++) {
     $word = render($pattern, $scn, $scc); // generate a word
     if ($rendering_aborted) {
       $fabts++;
