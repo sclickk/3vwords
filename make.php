@@ -192,16 +192,17 @@ if($pattern != "") {
   $start_time = array_sum(explode(' ',microtime()));
   for($i=1; $i<=$numw; $i++) {
     $word = render($pattern, $scn, $scc); // generate a word
-    if($rendering_aborted) { $fabts++; $rendering_aborted = 0; }
-    elseif(!$filterdup || !isset($generated_words[$word])) { 
-      $ws++; $generated_words[$word] = true; 
+    if ($rendering_aborted) {
+      $fabts++;
+      $rendering_aborted = 0;
+    } elseif (!$filterdup || !isset($generated_words[$word])) { 
+      $ws++;
+      $generated_words[$word] = true; 
       echo HTMLSpecialChars($word);
-      if ($nle) {
-        echo "<br />";
-      }
-      else echo " ";
+      echo ($nle ? "<br/>" : " ");
+    } else {
+      $dups++;
     }
-    else $dups++;
   }
   $finish_time = array_sum(explode(' ',microtime()));
   echo "</div>";
