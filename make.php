@@ -174,17 +174,20 @@ if($exceeded_weight_limit) {
 <input id="selectbutton" type="button" value="Select all" onclick="select_all()" />
 <?php
 /**
- * return the noun inflected for a specific number 
+ * Return the noun inflected for a specific number.
  */
 function number_form($noun, $n) {
-  if($n==1) return $noun;
-  else { // plural 
-    if(substr($noun, -1)=="y") return substr($noun, 0, -1)."ies";
-    return $noun."s";
+  if ($n == 1) { // Singular
+    return $noun;
+  } else { // Plural
+    if (substr($noun, -1) == "y") {
+      return substr($noun, 0, -1) . "ies";
+    }
+    return $noun . "s";
   }
 }
 
-if($pattern != "") {
+if ($pattern != "") {
   echo '<div id="words">';
   $ws = 0; // valid word counter
   $dups = 0; // duplicate counter
