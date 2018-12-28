@@ -127,9 +127,16 @@ if (!isset($pattern)) {
 value="<?php echo htmlspecialchars($pattern); ?>" maxlenght="200" size="64"></div>
 <div id="gensec"><label for="numw">words: </label>
 <?php 
-if(!IsSet($numw)) {
-  if($_POST['numw']>9999) $numw = 9999; else $numw = $_POST['numw']; 
-  if(!IsSet($_POST['numw'])) $numw = 100;
+if (!isset($numw)) {
+  if ($_POST['numw'] > 9999) {
+    $numw = 9999;
+  } else {
+    $numw = $_POST['numw'];
+  }
+
+  if(!isset($_POST['numw'])) {
+    $numw = 100;
+  }
 }
 
 echo '<input name="numw" id="numw" type="text" size="4" maxlength="4" value="' . $numw . '" />'; 
