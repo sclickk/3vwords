@@ -189,7 +189,8 @@ if($pattern != "") {
   $ws = 0; // valid word counter
   $dups = 0; // duplicate counter
   $fabts = 0; // aborted rendering counter
-  $start_time = array_sum(explode(' ',microtime()));
+  /** @var $start_time The microtime() at the start of rendering */
+  $start_time = array_sum(explode(' ', microtime()));
   for($i=1; $i<=$numw; $i++) {
     $word = render($pattern, $scn, $scc); // generate a word
     if ($rendering_aborted) {
@@ -204,7 +205,8 @@ if($pattern != "") {
       $dups++;
     }
   }
-  $finish_time = array_sum(explode(' ',microtime()));
+  /** @var $finish_time The microtime() at the end of rendering */
+  $finish_time = array_sum(explode(' ', microtime()));
   echo "</div>";
   echo "<div id=\"stats\">";
   echo $ws." ".number_form("word", $ws); 
