@@ -7,45 +7,8 @@
 <meta http-equiv="content-type" content="text/xml; charset=windows-1250" />
 <meta http-equiv="content-language" content="en" />
 <link rel="stylesheet" href="default.css" type="text/css" media="all" />
-<script src="lib/extern/jquery-3.3.1.min.js"></script>
-<script language="JavaScript" type="text/javascript">
-
-/**
- * Add a pattern to the shortcuts list.
- */
-function addscrow(n) {
-  var s = $('#sc_select' + n);
-  s.on('change', function () {});
-  var nrow = $('#sc_row' + (n+1));
-  nrow.css('display', 'block');
-  var ns = $('#sc_select' + (n+1));
-  ns.on('change', function () {
-    addscrow(n+1);
-  });
-}
-
-/**
- * The "Open >" button
- */
-function loadsec() {
-  $('#loadsec').css('display', 'block');
-  $('#loadsecinvoker').css('visibility', 'hidden');
-}
-
-function select_all() {
-  try {
-    selection = window.getSelection();
-    selection.removeAllRanges();
-    range = document.createRange();
-    range.selectNodeContents($('#words')[0]);
-    selection.addRange(range);
-  } catch(e) { // IE
-    range = document.body.createTextRange();
-    range.moveToElementText($('#words')[0]);
-    range.select();
-  }
-}
-</script>
+<script type="text/javsacript" src="lib/extern/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="lib/main.js"></script>
 </head>
 <body>
 <div class="heading">
