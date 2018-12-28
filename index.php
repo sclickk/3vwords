@@ -172,23 +172,29 @@ function fragments($string, &$scn, &$scc){
           $f[$i][0] .= $string[$p]; $p++;
         } while($level>=0 && $p<StrLen($string));
         $p--; $i++; $filti = 0;
-      }
-      else { // read characters
-        for($p; $string[$p]!='[' && $string[$p]!='('
-          && !($string[$p]>='A' && $string[$p]<='Z')
-          && $string[$p]!='^' && $p<StrLen($string); $p++) {
-            if($string[$p]=='"') { // escaping
-              $p++;
-              if($string[$p]=='"') $f[$i][0] .= '"'; // "" -> insert single " in the fragment
-              for($p; $string[$p]!='"' && $p<StrLen($string); $p++) { // read escaped characters
-                switch($string[$p]) {
-                  case '[': $f[$i][0] .= chr(1); break;  /* dummy characters for fragment-initial brackets */
-                  case '(': $f[$i][0] .= chr(2); break;  /* to get around their detection in render()      */
-                  default:  $f[$i][0] .= $string[$p];
-                }
+      } else { // read characters
+        for($p;
+         $string[$p] != '[' && $string[$p] != '('
+         && !($string[$p] >= 'A' && $string[$p] <= 'Z')
+         && $string[$p] != '^' && $p < StrLen($string);
+         $p++) {
+          // Escaping
+          if ($string[$p] == '"') {
+            $p++;
+            if ($string[$p] == '"') {
+              $f[$i][0] .= '"'; // "" -> insert single " in the fragment
+            }
+            // Read escaped characters
+            for($p; $string[$p] != '"' && $p < StrLen($string); $p++) {
+              switch($string[$p]) {
+                case '[': $f[$i][0] .= chr(1); break;  /* dummy characters for fragment-initial brackets */
+                case '(': $f[$i][0] .= chr(2); break;  /* to get around their detection in render()      */
+                default:  $f[$i][0] .= $string[$p];
               }
             }
-            else if($string[$p]!=' ') $f[$i][0] .= $string[$p]; // note: spaces don't interrupt the fragment
+          } else if ($string[$p] != ' ') {
+            $f[$i][0] .= $string[$p]; // note: spaces don't interrupt the fragment
+          }
         }
         $p--;
         if(IsSet($f[$i][0])) {
