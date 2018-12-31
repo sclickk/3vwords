@@ -32,8 +32,8 @@ function render($string, &$scn, &$scc, $c = 0)
       $f = fragments($options[$p], $scn, $scc); $nf = 1;
       for($i=0; isset($f[$i][0]); $i++) {
         switch($f[$i][0][0]) {
-          case '[': $nf *= render(SubStr($f[$i][0], 1, -1), $scn, $scc, $c); break;
-          case '(': $nf *= render(SubStr($f[$i][0], 1, -1), $scn, $scc, $c) + 1;
+          case '[': $nf *= render(substr($f[$i][0], 1, -1), $scn, $scc, $c); break;
+          case '(': $nf *= render(substr($f[$i][0], 1, -1), $scn, $scc, $c) + 1;
         }
       }
       $no += $nf;
@@ -45,11 +45,11 @@ function render($string, &$scn, &$scc, $c = 0)
       $fragr = "";
       switch($f[$i][0][0]) {
         case '[':
-          $fragr = render(SubStr($f[$i][0], 1, -1), $scn, $scc);
+          $fragr = render(substr($f[$i][0], 1, -1), $scn, $scc);
           break;
         case '(':
           if(mt_rand(0, 1) == 1) {
-            $fragr = render(SubStr($f[$i][0], 1, -1), $scn, $scc);
+            $fragr = render(substr($f[$i][0], 1, -1), $scn, $scc);
           }
           break;
         default:
@@ -177,8 +177,7 @@ function fragments($string, &$scn, &$scc){
       }
       $i++;
       $filti = 0;
-    }
-    elseif($string[$p]=='^') { // a filter for currently open fragment
+    } elseif($string[$p]=='^') { // a filter for currently open fragment
       $p++; $length = 0; $esc = false; // note: escaping works inside filters
       while(
         $esc || ( $string[$p+$length]!='[' && $string[$p+$length]!='('

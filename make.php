@@ -38,14 +38,14 @@ if(isset($_FILES['file'])) { // load settings from the file
   $f = FOpen($_FILES['file']['tmp_name'], "r");
   $n = 0;
   while($r = FGetS($f, 255)) {
-    if(SubStr($r, 0, 3)=="nle") $nle = true;
-    if(SubStr($r, 0, 9)=="filterdup") $filterdup = true;
-    if(EReg("^n:.*", $r)) $numw = (int) SubStr($r, 2, -1);
-    if(EReg("^r:.*", $r)) $pattern = SubStr($r, 2, -1);
+    if(substr($r, 0, 3)=="nle") $nle = true;
+    if(substr($r, 0, 9)=="filterdup") $filterdup = true;
+    if(EReg("^n:.*", $r)) $numw = (int) substr($r, 2, -1);
+    if(EReg("^r:.*", $r)) $pattern = substr($r, 2, -1);
     if(EReg("^[[:upper:]]?:.*", $r)) {
       $pos = StrPos($r, ":"); 
       if($pos==0) $scn[$n] = ""; else $scn[$n] = $r[0]; 
-      $scc[$n] = SubStr($r, $pos+1, -1); $n++;
+      $scc[$n] = substr($r, $pos+1, -1); $n++;
     }
   }
   FClose($f);
