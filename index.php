@@ -28,9 +28,9 @@ function render($string, &$scn, &$scc, $c = 0)
   if ($c > 0) { // count all possible renderings
     $options = choose($string, 1);
     $no = 0;
-    for ($p = 0; IsSet($options[$p]); $p++) {
+    for ($p = 0; isset($options[$p]); $p++) {
       $f = fragments($options[$p], $scn, $scc); $nf = 1;
-      for($i=0; IsSet($f[$i][0]); $i++) {
+      for($i=0; isset($f[$i][0]); $i++) {
         switch($f[$i][0][0]) {
           case '[': $nf *= render(SubStr($f[$i][0], 1, -1), $scn, $scc, $c); break;
           case '(': $nf *= render(SubStr($f[$i][0], 1, -1), $scn, $scc, $c) + 1;
@@ -41,7 +41,7 @@ function render($string, &$scn, &$scc, $c = 0)
     return $c*$no;
   } else { // render
     $f = fragments(choose($string), $scn, $scc);
-    for($i=0; IsSet($f[$i][0]); $i++) {
+    for($i=0; isset($f[$i][0]); $i++) {
       $fragr = "";
       switch($f[$i][0][0]) {
         case '[':
@@ -56,7 +56,7 @@ function render($string, &$scn, &$scc, $c = 0)
           $fragr = $f[$i][0];
       }
 
-      for($filti = 0; IsSet($f[$i][$filti + 1]); $filti++) { // filters of the fragment
+      for($filti = 0; isset($f[$i][$filti + 1]); $filti++) { // filters of the fragment
         if ($fragr == $f[$i][$filti + 1]) {
           $rendering_aborted = 1;
         }
@@ -239,7 +239,7 @@ function fragments($string, &$scn, &$scc){
           }
         }
         $p--;
-        if(IsSet($f[$i][0])) {
+        if(isset($f[$i][0])) {
           $i++;        /* [space] in [fragment1][space][fragment2] would leave its fragment unset. */
           $filti = 0;  /* This test lets [fragment2] go right after [fragment1].                   */
         }

@@ -34,7 +34,7 @@ v1.1 <!-- :: Awkwords version :: -->
 <span class="jslink" onclick="window.open('help.html', 'Awkwords_help', 'scrollbars=yes, toolbar=no, location=no, directories=no, status=no, menubar=no, width=650, height=350')">How to use</span>
 </div>-->
 <?php
-if(IsSet($_FILES['file'])) { // load settings from the file
+if(isset($_FILES['file'])) { // load settings from the file
   $f = FOpen($_FILES['file']['tmp_name'], "r");
   $n = 0;
   while($r = FGetS($f, 255)) {
@@ -135,7 +135,7 @@ echo '/>';
 echo "<label class=\"checkbox\" for=\"nle\">new line each</label>";
 
 echo '<input name="filterdup" id="filterdup" class="checkbox" type="checkbox"'; 
-if(IsSet($_POST['filterdup'])) $filterdup = $_POST['filterdup'];
+if(isset($_POST['filterdup'])) $filterdup = $_POST['filterdup'];
 if($filterdup) echo ' checked="checked"'; 
 echo ' />'; echo "<label class=\"checkbox\" for=\"filterdup\">filter duplicates</label>";
 
