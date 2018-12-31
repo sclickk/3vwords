@@ -166,7 +166,7 @@ function choose($string, $c = 0) {
  */
 function fragments($string, &$scn, &$scc){
   $i = 0; $filti = 0;
-  for($p=0; $p < StrLen($string); $p++) {
+  for($p=0; $p < strlen($string); $p++) {
     if($string[$p]>='A' && $string[$p]<='Z') { // a shortcut letter
       $scrlim = scrlim($scn);
       $f[$i][0] = "";
@@ -183,7 +183,7 @@ function fragments($string, &$scn, &$scc){
       while(
         $esc || ( $string[$p+$length]!='[' && $string[$p+$length]!='('
         && !($string[$p+$length]>='A' && $string[$p+$length]<='Z')
-        && $string[$p+$length]!='^' && ($p+$length)<StrLen($string))
+        && $string[$p+$length]!='^' && ($p+$length)<strlen($string))
         ) {
           if ($string[$p+$length] == '"') {
             $esc = 1 - $esc;
@@ -210,7 +210,7 @@ function fragments($string, &$scn, &$scc){
           if($string[$p] == '[' || $string[$p] == '(') $level++;
           if($string[$p] == ']' || $string[$p] == ')') $level--;
           $f[$i][0] .= $string[$p]; $p++;
-        } while($level >= 0 && $p < StrLen($string));
+        } while($level >= 0 && $p < strlen($string));
         $p--;
         $i++;
         $filti = 0;
@@ -218,7 +218,7 @@ function fragments($string, &$scn, &$scc){
         for($p;
          $string[$p] != '[' && $string[$p] != '('
          && !($string[$p] >= 'A' && $string[$p] <= 'Z')
-         && $string[$p] != '^' && $p < StrLen($string);
+         && $string[$p] != '^' && $p < strlen($string);
          $p++) {
           // Escaping
           if ($string[$p] == '"') {
@@ -227,7 +227,7 @@ function fragments($string, &$scn, &$scc){
               $f[$i][0] .= '"'; // "" -> insert single " in the fragment
             }
             // Read escaped characters
-            for($p; $string[$p] != '"' && $p < StrLen($string); $p++) {
+            for($p; $string[$p] != '"' && $p < strlen($string); $p++) {
               switch($string[$p]) {
                 case '[': $f[$i][0] .= chr(1); break;  /* dummy characters for fragment-initial brackets */
                 case '(': $f[$i][0] .= chr(2); break;  /* to get around their detection in render()      */
