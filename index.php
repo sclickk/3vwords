@@ -179,16 +179,17 @@ function fragments($string, &$scn, &$scc){
       $filti = 0;
     } elseif($string[$p]=='^') { // a filter for currently open fragment
       $p++; $length = 0; $esc = false; // note: escaping works inside filters
-      while(
-        $esc || ( $string[$p+$length]!='[' && $string[$p+$length]!='('
-        && !($string[$p+$length]>='A' && $string[$p+$length]<='Z')
-        && $string[$p+$length]!='^' && ($p+$length)<strlen($string))
-        ) {
-          if ($string[$p+$length] == '"') {
-            $esc = 1 - $esc;
-          }
-          $length++;
+      while($esc
+         || ($string[$p + $length] != '[' && $string[$p + $length] != '('
+          && !($string[$p + $length] >= 'A'
+            && $string[$p + $length] <= 'Z')
+          && $string[$p + $length] != '^'
+          && ($p + $length) < strlen($string))) {
+        if ($string[$p + $length] == '"') {
+          $esc = 1 - $esc;
         }
+        $length++;
+      }
       if($length > 0) {
         $filter = fragments(substr($string, $p, $length), $p, $length);
         //echo "<br>$p $length substring: ".substr($string, $p, $length)."<br>";
