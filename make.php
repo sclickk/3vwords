@@ -68,9 +68,9 @@ if(!isset($scn) && !isset($scc)) {
 
 for ($n = 0; $n <= 25; $n++) {
   echo "\n\n<div class=\"sc_row\" id=\"sc_row$n\""; 
-	echo ($n > $scrlim ? " style=\"display: none\"" : "");
+  echo ($n > $scrlim ? " style=\"display: none\"" : "");
   echo "><select style=\"width:4em\" name=\"scn[$n]\" id=\"sc_select$n\""; 
-	echo ($n == $scrlim ? " onchange=\"addscrow($n)\"" : "");
+  echo ($n == $scrlim ? " onchange=\"addscrow($n)\"" : "");
   echo ">";
   
   // The blank option
@@ -79,14 +79,14 @@ for ($n = 0; $n <= 25; $n++) {
   echo ">-</option>\n";
 
   // Options of alphabet letters.
-	$i = 0; $char = 'A';
+  $i = 0; $char = 'A';
   while ($i <= 25) {
     echo "<option value=\"$char\"";
     if ($scn[$n] == $char) {
       echo " selected";
     }
     echo ">$char</option>\n"; 
-  	$i++; $char++;
+    $i++; $char++;
   }
   echo "</select>";
 
