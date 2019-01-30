@@ -68,18 +68,12 @@ if(!isset($scn) && !isset($scc)) {
 
 for ($n = 0; $n <= 25; $n++) {
   echo "\n\n<div class=\"sc_row\" id=\"sc_row$n\""; 
-	if ($n > $scrlim) {
-    echo " style=\"display: none\"";
-  }
-	echo "><select style=\"width:4em\" name=\"scn[$n]\" id=\"sc_select$n\""; 
-	if($n == $scrlim) {
-    echo " onchange=\"addscrow($n)\"";
-  }
+	echo ($n > $scrlim ? " style=\"display: none\"" : "");
+  echo "><select style=\"width:4em\" name=\"scn[$n]\" id=\"sc_select$n\""; 
+	echo ($n == $scrlim ? " onchange=\"addscrow($n)\"" : "");
 	echo ">";
   echo "<option value=\"\"";
-  if($scn[$n] == "") {
-    echo " selected";
-  }
+  echo ($scn[$n] == "" ? " selected" : "");
   echo ">-</option>\n";
 	$i = 0; $char = 'A';
   while ($i <= 25) {
