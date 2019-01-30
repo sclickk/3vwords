@@ -71,10 +71,14 @@ for ($n = 0; $n <= 25; $n++) {
 	echo ($n > $scrlim ? " style=\"display: none\"" : "");
   echo "><select style=\"width:4em\" name=\"scn[$n]\" id=\"sc_select$n\""; 
 	echo ($n == $scrlim ? " onchange=\"addscrow($n)\"" : "");
-	echo ">";
+  echo ">";
+  
+  // The blank option
   echo "<option value=\"\"";
   echo ($scn[$n] == "" ? " selected" : "");
   echo ">-</option>\n";
+
+  // Options of alphabet letters.
 	$i = 0; $char = 'A';
   while ($i <= 25) {
     echo "<option value=\"$char\"";
@@ -85,6 +89,8 @@ for ($n = 0; $n <= 25; $n++) {
   	$i++; $char++;
   }
   echo "</select>";
+
+  // The input for the pattern.
   echo "<input name=\"scc[]\" type=\"text\" value=\"" . htmlspecialchars($scc[$n])
   ."\" size=\"64\" id=\"sc_input$n\"></div>"; 
 }
