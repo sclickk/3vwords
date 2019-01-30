@@ -76,14 +76,22 @@ for ($n = 0; $n <= 25; $n++) {
     echo " onchange=\"addscrow($n)\"";
   }
 	echo ">";
-  echo "<option value=\"\""; if($scn[$n]=="") echo " selected"; echo ">-</option>\n";
+  echo "<option value=\"\"";
+  if($scn[$n] == "") {
+    echo " selected";
+  }
+  echo ">-</option>\n";
 	$i = 0; $char = 'A';
   while ($i <= 25) {
-    echo "<option value=\"$char\""; if($scn[$n]==$char) echo " selected"; echo ">$char</option>\n"; 
+    echo "<option value=\"$char\"";
+    if ($scn[$n] == $char) {
+      echo " selected";
+    }
+    echo ">$char</option>\n"; 
   	$i++; $char++;
   }
   echo "</select>";
-  echo "<input name=\"scc[]\" type=\"text\" value=\"".htmlspecialchars($scc[$n])
+  echo "<input name=\"scc[]\" type=\"text\" value=\"" . htmlspecialchars($scc[$n])
   ."\" size=\"64\" id=\"sc_input$n\"></div>"; 
 }
 ?> </div>
