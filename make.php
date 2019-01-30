@@ -213,6 +213,7 @@ if ($pattern != "") {
   /** @var $finish_time The microtime() at the end of rendering */
   $finish_time = array_sum(explode(' ', microtime()));
   echo "</div>";
+  // Generate stats
   echo "<ul id=\"stats\">";
   echo "<li>".$ws." ".number_form("word", $ws); 
   if($dups || $fabts) {
