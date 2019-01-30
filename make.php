@@ -66,6 +66,9 @@ if(!isset($scn) && !isset($scc)) {
   $scrlim = scrlim($scn);
 }
 
+/** @var $uppercase_letters The uppercase leters of the Latin alphabet. */
+$uppercase_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 for ($n = 0; $n <= 25; $n++) {
   echo "\n\n<div class=\"sc_row\" id=\"sc_row$n\""; 
   echo ($n > $scrlim ? " style=\"display: none\"" : "");
@@ -79,12 +82,12 @@ for ($n = 0; $n <= 25; $n++) {
   echo ">-</option>\n";
 
   // Options of alphabet letters.
-  $i = 0; $char = 'A';
-  while ($i <= 25) {
-    echo "<option value=\"$char\"";
-    echo ($scn[$n] == $char ? " selected" : "");
-    echo ">$char</option>\n"; 
-    $i++; $char++;
+  for ($i = 0; $i < strlen($uppercase_letters); $i++) {
+    $c = $uppercase_letters[$i];
+    echo "<option value=\"$c\"";
+    echo ($scn[$n] == $c ? " selected" : "");
+    echo ">$c</option>\n"; 
+
   }
   echo "</select>";
 
