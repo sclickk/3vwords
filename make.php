@@ -82,9 +82,7 @@ for ($n = 0; $n <= 25; $n++) {
   $i = 0; $char = 'A';
   while ($i <= 25) {
     echo "<option value=\"$char\"";
-    if ($scn[$n] == $char) {
-      echo " selected";
-    }
+    echo ($scn[$n] == $char ? " selected" : "");
     echo ">$char</option>\n"; 
     $i++; $char++;
   }
