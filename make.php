@@ -87,7 +87,6 @@ for ($n = 0; $n <= 25; $n++) {
     echo "<option value=\"$c\"";
     echo ($scn[$n] == $c ? " selected" : "");
     echo ">$c</option>\n"; 
-
   }
   echo "</select>";
 
@@ -126,7 +125,9 @@ if (!isset($numw)) {
   }
 }
 
-echo '<input name="numw" id="numw" type="text" size="4" maxlength="4" value="' . $numw . '" />'; 
+echo '<input name="numw" id="numw" type="text" size="4" maxlength="4" value="' . $numw . '" />';
+
+// New each line option
 
 echo '<input name="nle" id="nle" class="checkbox" type="checkbox"';
 
@@ -212,8 +213,8 @@ if ($pattern != "") {
   /** @var $finish_time The microtime() at the end of rendering */
   $finish_time = array_sum(explode(' ', microtime()));
   echo "</div>";
-  echo "<div id=\"stats\">";
-  echo $ws." ".number_form("word", $ws); 
+  echo "<ul id=\"stats\">";
+  echo "<li>".$ws." ".number_form("word", $ws); 
   if($dups || $fabts) {
     echo " (filtered out: ";
     if($dups) echo $dups." ".number_form("duplicate", $dups);
@@ -221,11 +222,12 @@ if ($pattern != "") {
     if($fabts) echo $fabts." by pattern filters";
     echo ")";
   }
+  echo "</li>";
+  echo "<li>possibilities with this pattern: " . $possibilities . "</li>";
   /** @var $generated_time The time took the page to generate. */
   $generated_time = $finish_time - $start_time;
-  echo " | generated in " . sprintf("%.3f", $generated_time) . " seconds";
-  echo " | possibilities with this pattern: " . $possibilities;
-  echo "</div>";
+  echo "<li>generated in " . sprintf("%.3f", $generated_time) . " seconds</li>";
+  echo "</ul>";
 }
 ?>
 </div>
