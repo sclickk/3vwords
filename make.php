@@ -147,7 +147,7 @@ echo "<label class=\"checkbox\" for=\"nle\">new line each</label>";
 
 echo '<input name="filterdup" id="filterdup" class="checkbox" type="checkbox"'; 
 if(isset($_POST['filterdup'])) $filterdup = $_POST['filterdup'];
-if($filterdup) echo ' checked="checked"'; 
+if(isset($filterdup)) echo ' checked="checked"'; 
 echo ' />'; echo "<label class=\"checkbox\" for=\"filterdup\">filter duplicates</label>";
 
 ?> 
