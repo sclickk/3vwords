@@ -6,7 +6,7 @@
 function scrlim(&$scn)
 {
   for ($n = 0; $n <= 25; $n++) {
-    if ($scn[$n] != "") {
+    if (isset($scn[$n])) {
       $scrlim = $n + 1;
     }
   }
@@ -16,62 +16,6 @@ function scrlim(&$scn)
 
 $rendering_aborted = 0;
 $exceeded_weight_limit = 0;
-
-/**
- * Recursively goes through the given pattern $string.
- * $c==0 (default) -- return the number all possible renderings
- * otherwise       -- return a randomly generated string
- */
-function render($string, &$scn, &$scc, $c = 0)
-{
-  global $rendering_aborted;
-  if ($c > 0) { // count all possible renderings
-    $options = choose($string, 1);
-    $no = 0;
-    for ($p = 0; isset($options[$p]); $p++) {
-      $f = fragments($options[$p], $scn, $scc); $nf = 1;
-      for($i=0; isset($f[$i][0]); $i++) {
-        switch($f[$i][0][0]) {
-          case '[': $nf *= render(substr($f[$i][0], 1, -1), $scn, $scc, $c); break;
-          case '(': $nf *= render(substr($f[$i][0], 1, -1), $scn, $scc, $c) + 1;
-        }
-      }
-      $no += $nf;
-    }
-    return $c*$no;
-  } else { // render
-    $f = fragments(choose($string), $scn, $scc);
-    for($i=0; isset($f[$i][0]); $i++) {
-      $fragr = "";
-      switch($f[$i][0][0]) {
-        case '[':
-          $fragr = render(substr($f[$i][0], 1, -1), $scn, $scc);
-          break;
-        case '(':
-          if(mt_rand(0, 1) == 1) {
-            $fragr = render(substr($f[$i][0], 1, -1), $scn, $scc);
-          }
-          break;
-        default:
-          $fragr = $f[$i][0];
-      }
-
-      for($filti = 0; isset($f[$i][$filti + 1]); $filti++) { // filters of the fragment
-        if ($fragr == $f[$i][$filti + 1]) {
-          $rendering_aborted = 1;
-        }
-      }
-
-      if ($rendering_aborted) {
-        return false;
-      }
-
-      $r .= $fragr;
-    }
-    $uncover_brackets = chr(1) . chr(2);
-    return strtr($r, $uncover_brackets, "[(");
-  }
-}
 
 /**
  * Extracts filters from the syntax:
@@ -155,7 +99,6 @@ function choose($string, $c = 0) {
     return $target[mt_rand(0, $ti - 1)];
   }
 }
-
 
 /**
  * Divides $string containing a pattern into fragments it has on its top level.
@@ -245,6 +188,62 @@ function fragments($string, &$scn, &$scc){
   }
   //echo "fragmented string: $string --> "; print_r($f); echo "<br>";
   return $f;
+}
+
+/**
+ * Recursively goes through the given pattern $string.
+ * $c==0 (default) -- return the number all possible renderings
+ * otherwise       -- return a randomly generated string
+ */
+function render($string, &$scn, &$scc, $c = 0)
+{
+  global $rendering_aborted;
+  if ($c > 0) { // count all possible renderings
+    $options = choose($string, 1);
+    $no = 0;
+    for ($p = 0; isset($options[$p]); $p++) {
+      $f = fragments($options[$p], $scn, $scc); $nf = 1;
+      for($i=0; isset($f[$i][0]); $i++) {
+        switch($f[$i][0][0]) {
+          case '[': $nf *= render(substr($f[$i][0], 1, -1), $scn, $scc, $c); break;
+          case '(': $nf *= render(substr($f[$i][0], 1, -1), $scn, $scc, $c) + 1;
+        }
+      }
+      $no += $nf;
+    }
+    return $c*$no;
+  } else { // render
+    $f = fragments(choose($string), $scn, $scc);
+    for($i=0; isset($f[$i][0]); $i++) {
+      $fragr = "";
+      switch($f[$i][0][0]) {
+        case '[':
+          $fragr = render(substr($f[$i][0], 1, -1), $scn, $scc);
+          break;
+        case '(':
+          if(mt_rand(0, 1) == 1) {
+            $fragr = render(substr($f[$i][0], 1, -1), $scn, $scc);
+          }
+          break;
+        default:
+          $fragr = $f[$i][0];
+      }
+
+      for($filti = 0; isset($f[$i][$filti + 1]); $filti++) { // filters of the fragment
+        if ($fragr == $f[$i][$filti + 1]) {
+          $rendering_aborted = 1;
+        }
+      }
+
+      if ($rendering_aborted) {
+        return false;
+      }
+
+      $r .= $fragr;
+    }
+    $uncover_brackets = chr(1) . chr(2);
+    return strtr($r, $uncover_brackets, "[(");
+  }
 }
 
 /****************************************/
