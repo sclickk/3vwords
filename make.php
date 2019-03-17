@@ -5,8 +5,8 @@
 <title>Awkwords - word generator</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta http-equiv="content-language" content="en"/>
-<link rel="stylesheet" href="common.css" type="text/css" media="all"/>
-<link rel="stylesheet" href="default.css" type="text/css" media="all" />
+<link rel="stylesheet" href="assets/common.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="assets/default.css" type="text/css" media="all" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="lib/main.js"></script>
 </head>
