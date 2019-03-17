@@ -12,7 +12,7 @@ body {
   vertical-align: middle;
 }
 
-h1.h_left { 
+h1.h_left {
   float: left;
   display: inline;
   margin: 5px;
@@ -74,7 +74,7 @@ h1.h_left {
   margin: 20px;
 }
 
-#stats { 
+#stats {
   clear: both;
   border-top: dashed gray 1px;
   margin-top: 10px;
@@ -93,7 +93,7 @@ h1.h_left {
   margin-left: 5em;
   float: left;
   /*
-  width: 70%; 
+  width: 70%;
   text-align: right;
   */
 }

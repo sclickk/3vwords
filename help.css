@@ -2,11 +2,11 @@ body {
   padding: 0px 0px 20px 0px;
 }
 
-h1 { 
-  margin: 0px; 
+h1 {
+  margin: 0px;
   padding: 5px;
-  font-size: 140%; 
-  color: black; 
+  font-size: 140%;
+  color: black;
   background-color: #5ab8d0;
 }
 
@@ -42,12 +42,12 @@ h3 {
 
 #introsec { margin-right: 300px; }
 p, ul, ul li {
-  margin-left: 20px; 
+  margin-left: 20px;
   margin-right: 20px;
 }
 
-li p { 
-  margin: 8px; 
+li p {
+  margin: 8px;
 }
 
 ul.blocks {
@@ -62,7 +62,7 @@ ul.blocks li {
   padding: 3px;
 }
 
-.note { 
+.note {
   border: dashed 1px gray;
   padding: 10px;
 }
