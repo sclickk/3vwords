@@ -183,10 +183,9 @@ function number_form($noun, $n) {
   if ($n == 1) { // Singular
     return $noun;
   } else { // Plural
-    if (substr($noun, -1) == "y") {
-      return substr($noun, 0, -1) . "ies";
-    }
-    return $noun . "s";
+    return (substr($noun, -1) == "y"
+         ? (substr($noun, 0, -1) . "ies")
+         : $noun . "s");
   }
 }
 
