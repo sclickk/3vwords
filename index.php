@@ -88,11 +88,10 @@ get_filters();*/
  */
 function choose($string, $c = 0) {
   global $exceeded_weight_limit;
-  $p = 0;
   $i = 0;
   $ti = 0;
   $options[0] = ""; // allocate the first option
-  while($p < strlen($string)) {
+  for ($p = 0; $p < strlen($string); $p++) { 
     $level = 0;
     $weight_str = "";
     // process the option's characters
@@ -146,8 +145,6 @@ function choose($string, $c = 0) {
       $options[$i + 1] = "";
       $i++;
     }
-
-    $p++;
   }
 
   //print_r($options);
