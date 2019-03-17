@@ -176,6 +176,7 @@ if($exceeded_weight_limit) {
 ?>
 <input id="selectbutton" type="button" value="Select all" onclick="select_all()" />
 <?php
+
 /**
  * Return the noun inflected for a specific number.
  */
