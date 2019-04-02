@@ -3,9 +3,10 @@ body {
 }
 
 .heading {
-  background-color: #ECEEF0;
+  background-color: #eee;
   margin: 0px;
   padding: 0px;
+  border-bottom: 1px solid #aaa;
   width: 100%;
   text-align: center;
   line-height: 35px;
