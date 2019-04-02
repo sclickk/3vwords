@@ -54,7 +54,7 @@ function choose($string, $c = 0) {
         }
       } elseif ($string[$p] == '*') { // weight specification
         $p++;
-        for($p; $string[$p].preg_match('/[0-9]/') // is a number
+        for($p; preg_match('/[0-9]/', $string[$p]) // is a number
              && $p < strlen($string); $p++) {
           $weight_str .= $string[$p];
         }
@@ -113,7 +113,7 @@ function choose($string, $c = 0) {
 function fragments($string, &$scn, &$scc){
   $i = 0; $filti = 0;
   for($p=0; $p < strlen($string); $p++) {
-    if($string[$p]>='A' && $string[$p]<='Z') { // a shortcut letter
+    if(preg_match('/[A-Z]/', $string[$p])) { // a shortcut letter
       $scrlim = scrlim($scn);
       $f[$i][0] = "";
       for ($n = 0; $n < $scrlim; $n++) {
@@ -127,8 +127,7 @@ function fragments($string, &$scn, &$scc){
       $p++; $length = 0; $esc = false; // note: escaping works inside filters
       while($esc
          || ($string[$p + $length] != '[' && $string[$p + $length] != '('
-          && !($string[$p + $length] >= 'A'
-            && $string[$p + $length] <= 'Z')
+          && !(preg_match('/[A-Z]/', $string[$p + $length])) // is a letter
           && $string[$p + $length] != '^'
           && ($p + $length) < strlen($string))) {
         if ($string[$p + $length] == '"') {
