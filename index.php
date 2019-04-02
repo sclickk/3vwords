@@ -1,5 +1,7 @@
 <?php
 
+define('VERSION', '0.1.0');
+
 /**
  * Returns the index of the row just after the last filled row.
  */

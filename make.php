@@ -26,7 +26,7 @@ width="14" height="14" alt="NAVRCHOLU.cz"
 style="border:none" /></a></div></noscript>
 </div>
 -->
-v1.1 <!-- :: Awkwords version :: -->
+<?php echo 'version ' . VERSION; ?>
 <div class="clear">&nbsp;</div>
 </div>
 
