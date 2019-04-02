@@ -61,8 +61,13 @@ function choose($string, $c = 0) {
         $p--;
       } else {
         $options[$i] .= $string[$p];
-        if ($string[$p] == '[' || $string[$p] == '(') $level++;
-        if ($string[$p] == ']' || $string[$p] == ')') $level--;
+        switch ($string[$p]) {
+          case '[': $level++; break;
+          case '(': $level++; break;
+          case ']': $level--; break;
+          case ')': $level--; break;
+          default: break;
+        }
       }
     }
     if ($weight_str == "") {
