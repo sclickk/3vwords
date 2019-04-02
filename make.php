@@ -202,7 +202,7 @@ if ($pattern != "") {
     if ($rendering_aborted) {
       $fabts++;
       $rendering_aborted = 0;
-    } elseif (!$filterdup || !isset($generated_words[$word])) { 
+    } elseif (!isset($filterdup) || !isset($generated_words[$word])) { 
       $ws++;
       $generated_words[$word] = true; 
       echo HTMLSpecialChars($word);
