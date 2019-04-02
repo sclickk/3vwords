@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>Awkwords - word generator</title>
+<title>3vwords</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta http-equiv="content-language" content="en"/>
 <link rel="stylesheet" href="assets/common.css" type="text/css" media="all"/>
@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="heading">
-<h1 class="h_left">Awkwords - word generator</h1>
+<h1 class="h_left">3vwords</h1>
 <div class="h_right">
 <a id="help" href="help.html" target="_blank">Help</a>
 </div>
