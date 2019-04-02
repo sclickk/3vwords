@@ -73,7 +73,7 @@ $uppercase_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 for ($n = 0; $n <= 25; $n++) {
   echo "\n\n<div class=\"sc_row\" id=\"sc_row$n\""; 
   echo ($n > $scrlim ? " style=\"display: none\"" : "");
-  echo "><select style=\"width:4em\" name=\"scn[$n]\" id=\"sc_select$n\""; 
+  echo "><select class=\"sc_select_input\" name=\"scn[$n]\" id=\"sc_select$n\""; 
   echo ($n == $scrlim ? " onchange=\"addscrow($n)\"" : "");
   echo ">";
   

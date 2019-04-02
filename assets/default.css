@@ -41,6 +41,10 @@ h1.h_left {
   background-color: #5ab8d0;
 }
 
+.sc_select_input {
+  width: 4em;
+}
+
 #help {
   padding-left: 34px;
   background-image: url('iicon.gif');
