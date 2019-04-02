@@ -41,8 +41,19 @@ h1.h_left {
   background-color: #5ab8d0;
 }
 
+input, select, button {
+  border: 1px solid #aaa;
+  padding: 2px 4px 2px 4px;
+  border-radius: 4px;
+}
+
+.sc_row {
+  margin-bottom: 4px;
+}
+
 .sc_select_input {
   width: 4em;
+  margin-right: 4px;
 }
 
 #help {
