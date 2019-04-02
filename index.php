@@ -54,8 +54,7 @@ function choose($string, $c = 0) {
         }
       } elseif ($string[$p] == '*') { // weight specification
         $p++;
-        for($p; $string[$p] >= '0'
-             && $string[$p] <= '9'
+        for($p; $string[$p].preg_match('/[0-9]/') // is a number
              && $p < strlen($string); $p++) {
           $weight_str .= $string[$p];
         }
