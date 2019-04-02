@@ -14,7 +14,6 @@ body {
 }
 
 h1.h_left {
-  float: left;
   display: inline;
   margin: 5px;
   font-size: 120%;
@@ -32,7 +31,6 @@ h1.h_left {
   float: left;
   line-height: 35px;
   padding: 0 10px 0 10px;
-  vertical-align: middle;
   color: blue;
   font-weight: bold;
   text-decoration: none;
